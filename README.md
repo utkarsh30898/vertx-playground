@@ -34,6 +34,9 @@ Learning vertx
    -  Now from Main Vertice pass request to that addr you want response from, you will get the repy and then handle and return that repy.
      ![image](https://github.com/utkarsh30898/vertx-playground/assets/49248032/deb2f7b3-2bbf-42ba-8242-ac042ef92705)
 
+4) Worker Verticles
+   - you can set multiple instances of verticles using depoyment options.
+   - ![image](https://github.com/utkarsh30898/vertx-playground/assets/49248032/7380c205-7643-43cc-b8ad-4807e29333dd)
 
   
 

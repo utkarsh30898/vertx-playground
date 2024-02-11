@@ -16,10 +16,14 @@ public class MainVerticle extends AbstractVerticle {
     }
 
     public void helloVertx (RoutingContext context) {
-        context.request().response().end("Hello World form vert.x");
+        vertx.eventBus().request("hello.vertx.addr", "", reply -> {
+           context.request().response().end((String) reply.result().body());
+        });
     }
     public void helloNameVertx (RoutingContext context) {
         String name = context.pathParam("name");
-        context.request().response().end(String.format("Hello vert.x world from %s", name));
+        vertx.eventBus().request("hello.vertx.addr", name, reply -> {
+           context.request().response().end((String) reply.result().body());
+        });
     }
 }

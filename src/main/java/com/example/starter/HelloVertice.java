@@ -6,7 +6,6 @@ public class HelloVertice extends AbstractVerticle {
 
     @Override
     public void start() throws Exception {
-        vertx.deployVerticle(new HelloVertice());
         vertx.eventBus().consumer("hello.vertx.addr", msg -> {
             msg.reply("Hello World form vert.x");
         });

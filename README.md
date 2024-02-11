@@ -38,5 +38,13 @@ Learning vertx
    - you can set multiple instances of verticles using depoyment options.
    - ![image](https://github.com/utkarsh30898/vertx-playground/assets/49248032/7380c205-7643-43cc-b8ad-4807e29333dd)
 
-  
+6) vertx configuration stores
+   - to handle configuration parameters and settings coming to our app
+   - add vertx-config dependecy use...concept is explained in comments inside code
+   - the promise.complete() method is used to complete a Promise in a Vert.x asynchronous operation. it signals that the asynchronous operation associated with          that promise has successfully completed
+     ![image](https://github.com/utkarsh30898/vertx-playground/assets/49248032/1ad4cc41-f5f5-4bd4-a33d-18210aba816e)
+   -  Any code that is waiting for the completion of this asynchronous operation can register a handler to be executed when the promise is completed
+     
+        ![image](https://github.com/utkarsh30898/vertx-playground/assets/49248032/5a693378-37d7-4b91-b20d-0c1566e0651b)
+
 

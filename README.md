@@ -46,5 +46,12 @@ Learning vertx
    -  Any code that is waiting for the completion of this asynchronous operation can register a handler to be executed when the promise is completed
      
         ![image](https://github.com/utkarsh30898/vertx-playground/assets/49248032/5a693378-37d7-4b91-b20d-0c1566e0651b)
+7) Route Chaining and Static Handlers
+   - Routes will be chained in the order they are writen
+     ![image](https://github.com/utkarsh30898/vertx-playground/assets/49248032/0dbf0883-5141-4b41-a9b4-33a47b826e15)
+     
+     if path matches first route will be executed else if second matches it will be executed else in case of localhost8080 static page will be loaded and for every other path resourse not found page will be    
+     loaded.
+     
 
 

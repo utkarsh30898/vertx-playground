@@ -8,6 +8,7 @@ import io.vertx.core.*;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.handler.StaticHandler;
 
 public class MainVerticle extends AbstractVerticle {
 
@@ -17,6 +18,7 @@ public class MainVerticle extends AbstractVerticle {
         Router router = Router.router(vertx);
         router.get("/api/v1/hello").handler(this::helloVertx);
         router.get("/api/v1/hello/:name").handler(this::helloNameVertx);
+        router.route().handler(StaticHandler.create("staticContent"));
 
         // We want a config file in format of json and path to it is config.json
         ConfigStoreOptions configStoreOptions = new ConfigStoreOptions()
@@ -52,7 +54,7 @@ public class MainVerticle extends AbstractVerticle {
     }
     public void helloNameVertx (RoutingContext context) {
         String name = context.pathParam("name");
-        vertx.eventBus().request("hello.vertx.addr", name, reply -> {
+        vertx.eventBus().request("hello.named.addr", name, reply -> {
            context.request().response().end((String) reply.result().body());
         });
     }

@@ -52,6 +52,11 @@ Learning vertx
      
      if path matches first route will be executed else if second matches it will be executed else in case of localhost8080 static page will be loaded and for every other path resourse not found page will be    
      loaded.
-     
+
+11) Using Traditional Java Libraries With Vert.x
+   - To run blocking code inside vertx
+      - first param is lambda or method reference to the method that does blocking code ans second param is the handler
+    
+        ![image](https://github.com/utkarsh30898/vertx-playground/assets/49248032/8e5a4f7c-a47a-48b6-9df3-84004b7cae4c)
 
 

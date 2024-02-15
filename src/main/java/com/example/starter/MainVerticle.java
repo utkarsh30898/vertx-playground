@@ -13,12 +13,29 @@ import io.vertx.ext.web.handler.StaticHandler;
 public class MainVerticle extends AbstractVerticle {
 
     @Override
-    public void start(Promise<Void> promise) {
+    public void start(Promise<Void> startPromise) {
         vertx.deployVerticle(new HelloVertice());
         Router router = Router.router(vertx);
         router.get("/api/v1/hello").handler(this::helloVertx);
         router.get("/api/v1/hello/:name").handler(this::helloNameVertx);
         router.route().handler(StaticHandler.create("staticContent"));
+
+//        vertx.executeBlocking(promise -> {
+//            try {
+//                //code
+//                promise.complete();
+//            } catch (Exception e) {
+//                promise.fail(e);
+//            }
+//        }, result -> {
+//            if ((result.failed())) { // used this instead of result.succeded() as startPromise also used in below code
+//                startPromise.fail(result.cause());
+//            }
+//        });
+// modularizing the above code below
+
+//        Handler<AsyncResult<Void>> doBlockingCode = result -> this.handleResult(startPromise, result);
+//        vertx.executeBlocking(this::doBlockingCode, doBlockingCode);
 
         // We want a config file in format of json and path to it is config.json
         ConfigStoreOptions configStoreOptions = new ConfigStoreOptions()
@@ -40,12 +57,26 @@ public class MainVerticle extends AbstractVerticle {
                 JsonObject http = config.getJsonObject("http");
                 Integer httpPort = http.getInteger("port");
                 vertx.createHttpServer().requestHandler(router).listen(httpPort);
-                promise.complete();
+                startPromise.complete();
             } else {
-                promise.fail("Unable to load configuration");
+                startPromise.fail("Unable to load configuration");
             }
         });
     }
+
+//    void handleResult(Promise<Void> start, AsyncResult<Void> result) {
+//        if (result.failed()) {
+//            start.fail(result.cause());
+//        }
+//    }
+//    void doBlockingCode(Promise<Void> promise) {
+//        try {
+//                //code
+//                promise.complete();
+//            } catch (Exception e) {
+//                promise.fail(e);
+//            }
+//    }
 
     public void helloVertx (RoutingContext context) {
         vertx.eventBus().request("hello.vertx.addr", "", reply -> {
